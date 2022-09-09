@@ -30,15 +30,33 @@ const fruit = new Fruit ({
 const personSchema = new mongoose.Schema({
   name: String,
   age: Number,
-  About: String
+  About: String,
+  favFruit: fruitSchema
 });
 
 const Person = mongoose.model("Person",personSchema);
 
+const pineapple = new Fruit({
+  name: "Pineapple",
+  rating: 9,
+  review: "Great nice"
+})
+
+const mango = new Fruit({
+  name: "Mango",
+  rating: 10,
+  review: "Best Fruit of All time"
+})
+
+// mango.save();
+
+// pineapple.save();
+
 const person = new Person({
-  name: "Roronoa Zoro",
+  name: "Robin",
   age: 21,
-  About: "If loyality is a person its Zoro"
+  favFruit: pineapple,
+  About: "Zoro's Wife"
 });
 
 // person.save();
@@ -105,10 +123,26 @@ Fruit.find(function(err,fruits){
 })
 
 
-Fruit.deleteOne({name:"Apple"},function(err){
+// Fruit.deleteOne({name:"Apple"},function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Suceessfully Deleted");
+//   }
+// })
+
+// Person.deleteMany({name: "Roronoa Zoro"},function(err){
+//   if(err){
+//     console.log(err);
+//   }else{
+//     console.log("Successfully deleted all the persons");
+//   }
+// })
+
+Person.updateOne({name: "Roronoa Zoro"},{favFruit: mango},function(err){
   if(err){
     console.log(err);
-  }else{
-    console.log("Suceessfully Deleted");
+  }else {
+    console.log("Successfully updated the content");
   }
 })
