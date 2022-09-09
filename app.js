@@ -19,8 +19,8 @@ const fruitSchema = new mongoose.Schema ({
 const Fruit = mongoose.model("Fruit",fruitSchema);
 
 const fruit = new Fruit ({
-  name: "Apple",
-  rating: 7,
+
+  rating: 10,
   review: "Pretty Good as a Fruit."
 
 });
@@ -69,14 +69,35 @@ const person = new Person({
 //   }
 // })
 
+// Fruit.updateOne({_id: "631b0021937311143f77e6c3"}, {name: "Peaches",function(err) {
+//   if(err){
+//     console.log(err);
+//   }else {
+//     console.log("SucessFully Updated the docx.");
+//   }
+// }});
+
+Fruit.updateOne({_id: "631b0021937311143f77e6c3"}, {name: "Peach"}
+).exec(function (err) {
+  if (err) {
+    console.log(err);
+  }else {
+    mongoose.disconnect(); 
+    console.log("Update Successful!");
+  };
+})
+
+
 Fruit.find(function(err,fruits){
 
   if (err) {
     console.log(err);
   }else { 
-    mongoose.disconnect(); 
+    
     fruits.forEach(fruit => {
       console.log(fruit.name);
     })
   }
 })
+
+
